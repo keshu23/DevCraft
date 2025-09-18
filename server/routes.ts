@@ -36,16 +36,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get contact submissions (for admin purposes)
-  app.get("/api/contact", async (req, res) => {
-    try {
-      const submissions = await storage.getContactSubmissions();
-      res.json(submissions);
-    } catch (error) {
-      console.error("Error fetching contact submissions:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  });
+  // Admin endpoint removed for security - contact submissions are logged server-side
 
   const httpServer = createServer(app);
   return httpServer;

@@ -58,6 +58,13 @@ export default function Navigation() {
               About
             </button>
             <button 
+              onClick={() => handleSmoothScroll("blog")}
+              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              data-testid="nav-blog"
+            >
+              Blog
+            </button>
+            <button 
               onClick={() => handleSmoothScroll("contact")}
               className="text-muted-foreground hover:text-foreground transition-colors duration-200"
               data-testid="nav-contact"
@@ -108,6 +115,13 @@ export default function Navigation() {
                 data-testid="mobile-nav-about"
               >
                 About
+              </button>
+              <button
+                onClick={() => handleSmoothScroll("blog")}
+                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
+                data-testid="mobile-nav-blog"
+              >
+                Blog
               </button>
               <button
                 onClick={() => handleSmoothScroll("contact")}

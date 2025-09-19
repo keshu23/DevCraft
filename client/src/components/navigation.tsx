@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Code } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location, navigate] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,18 +24,32 @@ export default function Navigation() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleHomeNavigation = () => {
+    if (location !== "/") {
+      navigate("/");
+    } else {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
       isScrolled ? "bg-card/90 backdrop-blur-lg border-b border-border shadow-sm" : "bg-transparent"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
+          <button 
+            onClick={handleHomeNavigation}
+            className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200"
+            data-testid="nav-home-logo"
+          >
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
               <Code className="text-white text-sm" />
             </div>
             <span className="font-display font-bold text-xl text-foreground">DevCraft</span>
-          </div>
+          </button>
           
           <div className="hidden md:flex items-center space-x-8">
             <button 
